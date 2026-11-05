@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en" data-root="..">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculators · Argentina in Numbers</title>
+  <meta name="description" content="Argentine inflation calculators: what a sum of pesos from any month since 1943 is worth today, how savings did in term deposits, UVA or dollars, your salary in real terms and in dollars, and a term deposit today by bank.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2374acdf'/%3E%3Crect y='21' width='64' height='22' fill='white'/%3E%3Ccircle cx='32' cy='32' r='6' fill='%23f6b40e'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../assets/theme.css">
+</head>
+<body>
+  <main>
+    <div class="wrap">
+      <header class="page-head">
+        <p class="eyebrow">Argentina in Numbers</p>
+        <h1>Calculators</h1>
+        <p class="lede">Four questions every Argentine asks. The answers use the official consumer price index, the Central Bank's average deposit rate and the market's dollar rates, month by month.</p>
+        <p class="updated" id="updated"></p>
+        <p class="note">For information only: past returns do not predict future ones, and these figures ignore taxes, fees and the limits on buying dollars that applied in many of these years. Not financial advice.</p>
+      </header>
+
+      <section class="block" id="worth">
+        <h2>What is it worth today?</h2>
+        <div class="calc">
+          <div class="card form">
+            <label>Amount <input type="number" id="w-amt" value="1000" min="0" step="any"></label>
+            <label>Month <select id="w-month"></select></label>
+            <label>Currency <select id="w-cur">
+              <option value="now">Today's pesos (zeros already removed)</option>
+              <option value="then">The currency of that time</option>
+            </select></label>
+          </div>
+          <div class="card">
+            <p class="label muted" style="margin:0">Equivalent today</p>
+            <div class="big-answer" id="w-out"></div>
+            <p class="answer-note" id="w-note"></p>
+            <div class="tiles" id="w-tiles" style="margin-top:14px"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="block" id="race">
+        <h2>Which savings did best?</h2>
+        <p class="sub">The same pesos put in different places at the start of a month and left there until today.</p>
+        <div class="calc">
+          <div class="card form">
+            <label>Pesos invested <input type="number" id="r-amt" value="1000000" min="0" step="any"></label>
+            <label>Starting month <select id="r-month"></select></label>
+            <p class="note" style="margin:0">Term deposits roll over every 30 days at the Central Bank's average rate. UVA follows the inflation-linked unit (from April 2016). The MEP rate starts in late 2018, the blue rate in 2011.</p>
+          </div>
+          <div class="card">
+            <div class="rank" id="r-rank"></div>
+            <p class="answer-note" id="r-note" style="margin-top:12px"></p>
+          </div>
+        </div>
+        <div class="card" style="margin-top:16px">
+          <h3>Value over time, in pesos of today</h3>
+          <div class="chart" id="r-chart"></div>
+          <div id="r-legend"></div>
+        </div>
+      </section>
+
+      <section class="block" id="salary">
+        <h2>Your salary, then and now</h2>
+        <div class="calc">
+          <div class="card form">
+            <label>Salary then <input type="number" id="s-then" value="1200000" min="0" step="any"></label>
+            <label>In <select id="s-month"></select></label>
+            <label>Salary now <input type="number" id="s-now" value="1500000" min="0" step="any"></label>
+          </div>
+          <div class="card">
+            <p class="label muted" style="margin:0">Change in what your salary buys</p>
+            <div class="big-answer" id="s-out"></div>
+            <p class="answer-note" id="s-note"></p>
+            <div class="tiles" id="s-tiles" style="margin-top:14px"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="block" id="deposit">
+        <h2>A term deposit today</h2>
+        <div class="calc">
+          <div class="card form">
+            <label>Amount <input type="number" id="d-amt" value="1000000" min="0" step="any"></label>
+            <label>Days <input type="number" id="d-days" value="30" min="30" max="365" step="1"></label>
+            <label>Expected monthly inflation (%) <input type="number" id="d-infl" step="0.1"></label>
+          </div>
+          <div class="card">
+            <h3>Interest by bank</h3>
+            <div class="rank" id="d-rank"></div>
+            <p class="note" id="d-note"></p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="../assets/vendor/d3.v7.9.0.min.js"></script>
+  <script src="../assets/core.js"></script>
+  <script src="../assets/ar.js"></script>
+  <script src="../assets/pages/calculators.js"></script>
+</body>
+</html>
