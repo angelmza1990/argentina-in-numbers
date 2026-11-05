@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" data-root=".">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Argentina in Numbers</title>
+  <meta name="description" content="Argentina's economy in data, updated every week: inflation since 1943, every dollar rate, reserves, country risk, activity, jobs, poverty, real wages, interest rates and calculators for your pesos.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2374acdf'/%3E%3Crect y='21' width='64' height='22' fill='white'/%3E%3Ccircle cx='32' cy='32' r='6' fill='%23f6b40e'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/theme.css">
+</head>
+<body>
+  <main>
+    <div class="wrap">
+      <header class="page-head">
+        <p class="eyebrow">Argentina · Economy in data</p>
+        <h1>Argentina in Numbers</h1>
+        <p class="lede">Inflation since 1943, every dollar rate, reserves, country risk, activity, jobs, poverty and real wages, from INDEC, the Central Bank and other public sources, refreshed every week. And calculators to see what your pesos, your salary or your savings are really worth.</p>
+        <p class="updated" id="updated"></p>
+      </header>
+
+      <section class="block">
+        <h2>The latest numbers</h2>
+        <p class="sub">The most recent figure of each indicator, with its last three years. Click a card for the full history.</p>
+        <div class="kpis" id="kpis"></div>
+      </section>
+
+      <section class="block">
+        <h2>Eighty years of inflation</h2>
+        <p class="sub">Consumer price inflation in every calendar year since 1944, December to December. Click a year to see it month by month.</p>
+        <div class="card">
+          <div class="igrid-wrap"><div id="grid"></div></div>
+          <div id="grid-legend"></div>
+          <p class="note">2007–2015: the official index is widely considered to have understated inflation in those years; see the <a href="method/">method</a>.</p>
+        </div>
+        <div class="tiles" id="infl-facts" style="margin-top:14px"></div>
+      </section>
+
+      <section class="block">
+        <h2>Explore</h2>
+        <div class="grid-2">
+          <a class="kpi" href="inflation/"><span class="value" style="font-size:18px">Inflation</span><span class="sub">Monthly and yearly since 1943, prices by category, core and regulated prices, and what analysts expected.</span></a>
+          <a class="kpi" href="dollar/"><span class="value" style="font-size:18px">Dollar</span><span class="sub">Official, wholesale, blue, MEP, CCL, crypto and card rates, the gap between them, and the dollar in today's pesos.</span></a>
+          <a class="kpi" href="economy/"><span class="value" style="font-size:18px">Economy</span><span class="sub">GDP since 1960, monthly activity, unemployment, poverty, real wages, the minimum wage since 1965, trade since 1910 and the fiscal balance.</span></a>
+          <a class="kpi" href="money/"><span class="value" style="font-size:18px">Money &amp; rates</span><span class="sub">Reserves, country risk, interest rates against inflation, the monetary base, M2 and credit.</span></a>
+          <a class="kpi" href="calculators/"><span class="value" style="font-size:18px">Calculators</span><span class="sub">What a sum of pesos from any month is worth today, how savings did in term deposits, UVA or dollars, and your salary in real terms.</span></a>
+          <a class="kpi" href="method/"><span class="value" style="font-size:18px">Method</span><span class="sub">Sources, definitions, currency changes and the limits of the data.</span></a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="assets/vendor/d3.v7.9.0.min.js"></script>
+  <script src="assets/core.js"></script>
+  <script src="assets/ar.js"></script>
+  <script src="assets/pages/home.js"></script>
+</body>
+</html>

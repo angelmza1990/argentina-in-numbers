@@ -1,13 +1,14 @@
-// World Atlas — shared helpers: page shell, data loading, formatting, tooltip and charts.
+// Argentina in Numbers — shared helpers: page shell, data loading, formatting, tooltip and charts.
 (function () {
   const ROOT = document.documentElement.dataset.root || ".";
 
   const PAGES = [
-    { id: "map", href: "", label: "World map" },
-    { id: "countries", href: "countries/", label: "Countries" },
-    { id: "continents", href: "continents/", label: "Continents" },
-    { id: "compare", href: "compare/", label: "Compare" },
-    { id: "changes", href: "changes/", label: "Through time" },
+    { id: "home", href: "", label: "Overview" },
+    { id: "inflation", href: "inflation/", label: "Inflation" },
+    { id: "dollar", href: "dollar/", label: "Dollar" },
+    { id: "economy", href: "economy/", label: "Economy" },
+    { id: "money", href: "money/", label: "Money & rates" },
+    { id: "calculators", href: "calculators/", label: "Calculators" },
     { id: "method", href: "method/", label: "Method" },
   ];
 
@@ -21,7 +22,7 @@
     return matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
   }
   try {
-    const saved = localStorage.getItem("wa-theme");
+    const saved = localStorage.getItem("ain-theme");
     if (saved === "light" || saved === "dark") document.documentElement.dataset.theme = saved;
   } catch (e) { /* no storage: follow the system setting */ }
 
@@ -35,7 +36,7 @@
     header.className = "topbar";
     header.innerHTML = `
       <div class="wrap topbar-inner">
-        <a class="brand" href="${ROOT}/">World Atlas <span>· Angel Villanueva</span></a>
+        <a class="brand" href="${ROOT}/">Argentina in Numbers <span>· Angel Villanueva</span></a>
         <ul class="nav">${PAGES.map((p) => `<li><a href="${ROOT}/${p.href}"${p.id === pageId ? ' aria-current="page"' : ""}>${p.label}</a></li>`).join("")}</ul>
         <button class="theme-toggle" type="button" aria-label="Toggle dark mode"></button>
       </div>`;
@@ -46,7 +47,7 @@
     btn.addEventListener("click", () => {
       const next = currentTheme() === "dark" ? "light" : "dark";
       document.documentElement.dataset.theme = next;
-      try { localStorage.setItem("wa-theme", next); } catch (e) { /* ignore */ }
+      try { localStorage.setItem("ain-theme", next); } catch (e) { /* ignore */ }
       paint();
       themeListeners.forEach((f) => f());
     });
@@ -55,10 +56,10 @@
     footer.className = "footer";
     footer.innerHTML = `
       <div class="wrap">
-        <p>Data: World Bank, World Development Indicators (CC BY 4.0). Country facts: mledoze/countries (ODbL).
-        Borders: Natural Earth. Flags: flagcdn.com. <a href="${ROOT}/method/">Method</a>.</p>
+        <p>Data: INDEC and the Ministry of Economy (datos.gob.ar), Banco Central de la República Argentina, argentinadatos.com and the World Bank.
+        Updated automatically every week. For information only; not financial advice. <a href="${ROOT}/method/">Method</a>.</p>
         <p>Built by <a href="https://angelmza1990.github.io">Angel Villanueva</a> ·
-        <a href="https://github.com/angelmza1990/world-atlas">Source on GitHub</a></p>
+        <a href="https://github.com/angelmza1990/argentina-in-numbers">Source on GitHub</a></p>
       </div>`;
     document.body.append(footer);
   }
