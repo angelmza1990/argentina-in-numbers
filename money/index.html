@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" data-root="..">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Money &amp; Rates · Argentina in Numbers</title>
+  <meta name="description" content="Argentina's Central Bank reserves since 1996, country risk since 1999, interest rates against inflation since 1985, real deposit returns, the monetary base, M2 and credit to the private sector.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2374acdf'/%3E%3Crect y='21' width='64' height='22' fill='white'/%3E%3Ccircle cx='32' cy='32' r='6' fill='%23f6b40e'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../assets/theme.css">
+</head>
+<body>
+  <main>
+    <div class="wrap">
+      <header class="page-head">
+        <p class="eyebrow">Argentina in Numbers</p>
+        <h1>Money &amp; rates</h1>
+        <p class="lede">The Central Bank's dollars, what the world charges Argentina to borrow, whether a peso deposit beats inflation, and how much money and credit the economy has.</p>
+        <p class="updated" id="updated"></p>
+      </header>
+
+      <section class="block">
+        <h2>Central Bank reserves</h2>
+        <p class="sub">Gross international reserves, US$ billions, end of each month. Gross reserves include swaps with other central banks and banks' dollar deposits held at the Central Bank, so net reserves are lower.</p>
+        <div class="tiles" id="res-tiles"></div>
+        <div class="card" style="margin-top:14px"><div class="chart" id="reserves"></div></div>
+      </section>
+
+      <section class="block">
+        <h2>Country risk</h2>
+        <p class="sub">The extra yield, in basis points (100 bp = 1 percentage point), that Argentine dollar bonds pay over US Treasuries (JP Morgan EMBI). Logarithmic scale.</p>
+        <div class="card"><div class="chart" id="risk"></div><p class="note" id="risk-note"></p></div>
+      </section>
+
+      <section class="block">
+        <h2>Does a peso deposit beat inflation?</h2>
+        <p class="sub">The annual rate on 30-day term deposits against inflation over the following twelve months, and the real return: what a month in a term deposit gained or lost after inflation, annualized.</p>
+        <div class="controls"><span class="control">Period <span id="rate-period"></span></span></div>
+        <div class="grid-2">
+          <div class="card"><h3>Deposit rate and inflation</h3><div class="chart" id="rates"></div><div id="rates-legend"></div></div>
+          <div class="card"><h3>Real return of a term deposit</h3><div class="chart" id="realrate"></div><p class="note" id="real-note"></p></div>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>Money and credit</h2>
+        <div class="grid-2">
+          <div class="card"><h3>Monetary base and M2, in today's pesos</h3><div class="chart" id="moneyreal"></div><div id="money-legend"></div><p class="note">Adjusted by the CPI. M2 is cash plus current and savings accounts.</p></div>
+          <div class="card"><h3>Loans to the private sector</h3><div class="chart" id="loans"></div><p class="note">Bank loans to the private sector as reported by the Central Bank in pesos, converted to US$ billions at each month's wholesale rate.</p></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="../assets/vendor/d3.v7.9.0.min.js"></script>
+  <script src="../assets/core.js"></script>
+  <script src="../assets/ar.js"></script>
+  <script src="../assets/pages/money.js"></script>
+</body>
+</html>
