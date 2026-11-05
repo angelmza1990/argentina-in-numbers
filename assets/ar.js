@@ -83,5 +83,8 @@
     sel.value = value;
   }
 
-  window.AR = { month, day, monthLabel, dayLabel, compact, money, usd, p, sp, spark, INDEC_BAND, inflClass, inflationGrid, inflationLegend, monthOptions, esc };
+  /** A legend of coloured lines: [[color, label], ...]. */
+  const lineLegend = (items) => `<div class="legend">${items.map(([c, l]) => `<span class="key"><span class="ln" style="background:${c}"></span>${l}</span>`).join("")}</div>`;
+
+  window.AR = { lineLegend, month, day, monthLabel, dayLabel, compact, money, usd, p, sp, spark, INDEC_BAND, inflClass, inflationGrid, inflationLegend, monthOptions, esc };
 })();

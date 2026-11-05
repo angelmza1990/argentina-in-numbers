@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" data-root="..">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inflation · Argentina in Numbers</title>
+  <meta name="description" content="Argentine inflation since 1943: monthly and 12-month rates, every year month by month, prices by category since 2017, core and regulated prices, and analysts' expectations against what happened.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2374acdf'/%3E%3Crect y='21' width='64' height='22' fill='white'/%3E%3Ccircle cx='32' cy='32' r='6' fill='%23f6b40e'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../assets/theme.css">
+  <style>
+    #year-bars svg, #cat-bars svg { display: block; width: 100%; height: auto; }
+    #year-bars text, #cat-bars text { font: 11.5px var(--sans); fill: var(--ink-2); font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="wrap">
+      <header class="page-head">
+        <p class="eyebrow">Argentina in Numbers</p>
+        <h1>Inflation</h1>
+        <p class="lede">Consumer prices month by month since 1943: the hyperinflations of 1989 and 1990, convertibility's price stability, the high-inflation years after 2018 and the disinflation that followed. INDEC's national index by category starts in December 2016.</p>
+        <p class="updated" id="updated"></p>
+      </header>
+
+      <section class="block">
+        <h2>Month by month</h2>
+        <div class="controls"><span class="control">Period <span id="period"></span></span><span class="control">Show <span id="measure"></span></span></div>
+        <div class="card">
+          <div class="chart" id="main"></div>
+          <p class="note" id="main-note"></p>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>One year in detail</h2>
+        <div class="controls"><label class="control">Year <select id="year"></select></label></div>
+        <div class="tiles" id="year-tiles"></div>
+        <div class="card" style="margin-top:14px">
+          <h3 id="year-title"></h3>
+          <div id="year-bars"></div>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>Every year since 1944</h2>
+        <p class="sub">December to December. Click a year to open it above.</p>
+        <div class="card">
+          <div class="igrid-wrap"><div id="grid"></div></div>
+          <div id="grid-legend"></div>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>Which prices rose most</h2>
+        <p class="sub" id="cat-sub"></p>
+        <div class="controls"><label class="control">From <select id="cat-from"></select></label><label class="control">To <select id="cat-to"></select></label></div>
+        <div class="card">
+          <div id="cat-bars"></div>
+          <p class="note">Ten of INDEC's twelve divisions; recreation and restaurants are missing from the public API. A category above the all-items line rose faster than prices in general.</p>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="grid-2">
+          <div class="card">
+            <h3>Core and regulated prices</h3>
+            <div class="chart" id="core"></div>
+            <div id="core-legend"></div>
+            <p class="note">12-month change. Core excludes seasonal and regulated items; regulated prices (utilities, fuel, transport, health plans) follow government decisions, and jumped when subsidies were cut.</p>
+          </div>
+          <div class="card">
+            <h3>What analysts expected</h3>
+            <div class="chart" id="expect"></div>
+            <div id="expect-legend"></div>
+            <p class="note">The Central Bank's survey of analysts (REM): the median forecast of inflation for the next twelve months, against the inflation that actually followed over those twelve months.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="../assets/vendor/d3.v7.9.0.min.js"></script>
+  <script src="../assets/core.js"></script>
+  <script src="../assets/ar.js"></script>
+  <script src="../assets/pages/inflation.js"></script>
+</body>
+</html>

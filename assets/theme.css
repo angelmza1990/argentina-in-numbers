@@ -304,3 +304,5 @@ a.kpi:hover { border-color: var(--line-2); }
 .rank-row b { font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
 .rank-row small { display: block; color: var(--muted); font-weight: 400; font-size: 11.5px; }
 @media (max-width: 560px) { .rank-row { grid-template-columns: 100px minmax(0, 1fr) auto; } }
+.grid-2 > .card, .grid-2 > .kpi { margin: 0; }
+.grid-2 { align-items: start; }
