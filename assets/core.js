@@ -8,6 +8,7 @@
     { id: "dollar", href: "dollar/", label: "Dollar" },
     { id: "economy", href: "economy/", label: "Economy" },
     { id: "money", href: "money/", label: "Money & rates" },
+    { id: "presidents", href: "presidents/", label: "By presidency" },
     { id: "calculators", href: "calculators/", label: "Calculators" },
     { id: "method", href: "method/", label: "Method" },
   ];

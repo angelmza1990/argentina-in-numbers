@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" data-root="..">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>By Presidency · Argentina in Numbers</title>
+  <meta name="description" content="Argentina's economy under each president since 1983: inflation, GDP per person, the dollar, reserves, country risk, unemployment, poverty and the real minimum wage at the start and end of every term.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2374acdf'/%3E%3Crect y='21' width='64' height='22' fill='white'/%3E%3Ccircle cx='32' cy='32' r='6' fill='%23f6b40e'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../assets/theme.css">
+  <style>
+    .pres { display: grid; gap: 12px; }
+    .pres-card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
+    .pres-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; align-items: baseline; margin-bottom: 10px; }
+    .pres-head h3 { margin: 0; font-size: 17px; text-transform: none; letter-spacing: 0; color: var(--ink); }
+    .pres-head span { color: var(--muted); font-size: 13px; }
+    .pres-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px 16px; }
+    .pres-grid div { min-width: 0; }
+    .pres-grid .l { font-size: 12px; color: var(--ink-2); }
+    .pres-grid .v { font-size: 17px; font-weight: 650; font-variant-numeric: tabular-nums; }
+    .pres-grid .s { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+    #compare svg { display: block; width: 100%; height: auto; }
+    #compare text { font: 12px var(--sans); fill: var(--ink-2); font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="wrap">
+      <header class="page-head">
+        <p class="eyebrow">Argentina in Numbers</p>
+        <h1>By presidency</h1>
+        <p class="lede">The economy under each president since the return of democracy in 1983, measured the same way for everyone: from the month before taking office to the last full month in office. Numbers describe what happened during a term, not what caused it; many outcomes reflect decisions, shocks and world prices from before or outside each government.</p>
+      </header>
+
+      <section class="block">
+        <h2>Compare one indicator</h2>
+        <div class="controls"><span class="control">Indicator <span id="metric"></span></span></div>
+        <div class="card"><div id="compare"></div><p class="note" id="compare-note"></p></div>
+      </section>
+
+      <section class="block">
+        <h2>Every term</h2>
+        <div class="pres" id="list"></div>
+        <p class="note">Interim presidents of December 2001 (Ramón Puerta, Adolfo Rodríguez Saá, Eduardo Camaño) are left out. Series start at different dates: the dollar since 1991 (fixed at one peso until 2001), reserves since 1996, country risk since 1999, unemployment since 2003; poverty uses the half-year published closest to the start and end. Inflation in 2007–2015 is the official figure, widely considered understated.</p>
+      </section>
+    </div>
+  </main>
+
+  <script src="../assets/vendor/d3.v7.9.0.min.js"></script>
+  <script src="../assets/core.js"></script>
+  <script src="../assets/ar.js"></script>
+  <script src="../assets/pages/presidents.js"></script>
+</body>
+</html>

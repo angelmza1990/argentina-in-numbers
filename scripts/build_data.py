@@ -288,6 +288,77 @@ def savings(cpi: dict[str, float], dol: dict) -> dict:
     return {"columns": ["month", "cpi", "deposit30", "official", "blue", "mep", "uva"], "rows": rows, "banks": banks}
 
 
+# ---------- presidencies ----------
+
+# Presidents since the return of democracy, with the day they took and left office. The interim
+# presidents of December 2001 (Puerta, Rodríguez Saá, Caamaño) served days and are left out.
+PRESIDENTS = [
+    ("Raúl Alfonsín", "UCR", "1983-12-10", "1989-07-08"),
+    ("Carlos Menem", "PJ", "1989-07-08", "1999-12-10"),
+    ("Fernando de la Rúa", "Alianza", "1999-12-10", "2001-12-21"),
+    ("Eduardo Duhalde", "PJ", "2002-01-02", "2003-05-25"),
+    ("Néstor Kirchner", "PJ (FPV)", "2003-05-25", "2007-12-10"),
+    ("Cristina Fernández de Kirchner", "PJ (FPV)", "2007-12-10", "2015-12-10"),
+    ("Mauricio Macri", "Cambiemos", "2015-12-10", "2019-12-10"),
+    ("Alberto Fernández", "Frente de Todos", "2019-12-10", "2023-12-10"),
+    ("Javier Milei", "La Libertad Avanza", "2023-12-10", None),
+]
+
+
+def presidencies(cpi: dict[str, float], eco: dict, mon: dict, dol: dict) -> list[dict]:
+    last = max(cpi)
+    def prev_month(d: str) -> str:
+        y, m = int(d[:4]), int(d[5:7]) - 1
+        return f"{y - 1}-12" if m == 0 else f"{y:04d}-{m:02d}"
+    def near(rows, m, before=True):
+        """Value at month m, or the closest one within 7 months on the requested side."""
+        d = dict(rows)
+        keys = sorted(d)
+        cands = [k for k in keys if (k <= m if before else k >= m)]
+        if not cands:
+            return None
+        k = cands[-1] if before else cands[0]
+        gap = abs((int(k[:4]) * 12 + int(k[5:7])) - (int(m[:4]) * 12 + int(m[5:7])))
+        return [k, d[k]] if gap <= 7 else None
+    wholesale = {m["m"]: m.get("mayorista") for m in dol["monthly"]}
+    # Convertibility fixed the peso at one dollar from April 1991 to the end of 2001.
+    for y in range(1991, 2002):
+        for mo in range(4 if y == 1991 else 1, 13):
+            wholesale.setdefault(f"{y}-{mo:02d}", 1.0)
+    out = []
+    for name, party, start, end in PRESIDENTS:
+        a = prev_month(start)                      # the month before taking office
+        b = prev_month(end) if end else last       # the last full month in office
+        if b > last:
+            b = last
+        months = (int(b[:4]) * 12 + int(b[5:7])) - (int(a[:4]) * 12 + int(a[5:7]))
+        infl = cpi[b] / cpi[a] - 1
+        row = {
+            "name": name, "party": party, "start": start, "end": end, "from": a, "to": b, "months": months,
+            "inflation": r(infl, 5), "inflationYear": r((1 + infl) ** (12 / months) - 1, 5) if months else None,
+        }
+        # GDP per person: a year counts for the president who held office most of it, so the base
+        # is the year of taking office when that was in the second half, otherwise the year before.
+        gdp = dict(eco["gdpPerCapReal"])
+        y0 = int(start[:4]) if start[5:7] >= "07" else int(start[:4]) - 1
+        y1 = (int(end[:4]) if end[5:7] >= "07" else int(end[:4]) - 1) if end else max(gdp)
+        if y0 in gdp and y1 in gdp and y1 > y0:
+            row["gdpPerCap"] = r(gdp[y1] / gdp[y0] - 1, 4)
+            row["gdpPerCapYear"] = r((gdp[y1] / gdp[y0]) ** (1 / (y1 - y0)) - 1, 4)
+            row["gdpYears"] = [y0, y1]
+        if wholesale.get(a) and wholesale.get(b):
+            row["dollar"] = [r(wholesale[a], 3), r(wholesale[b], 3)]
+        for key, rows in (("reserves", mon["reserves"]), ("risk", mon["riskMonthly"]), ("unemployment", eco["unemployment"]),
+                          ("poverty", eco["poverty"]), ("minWage", eco["minWageReal"])):
+            s0, s1 = near(rows, a, before=True) or near(rows, a, before=False), near(rows, b, before=True)
+            if s0 and s1 and s0[0] < s1[0]:
+                row[key] = [s0, s1]
+        out.append(row)
+    menem = next(x for x in out if x["name"] == "Carlos Menem")
+    check(menem["inflation"] > 30, "Menem's term should include the 1989-90 hyperinflation")
+    return out
+
+
 # ---------- overview ----------
 
 def overview(p: dict, dol: dict, eco: dict, mon: dict) -> dict:
@@ -330,6 +401,7 @@ def main() -> None:
     mon = money(cpi)
     sav = savings(cpi, dol)
     ov = overview(p, dol, eco, mon)
+    pres = presidencies(cpi, eco, mon, dol)
     if errors:
         sys.exit("validation failed:\n  " + "\n  ".join(errors))
     write("prices.json", p)
@@ -338,6 +410,7 @@ def main() -> None:
     write("money.json", mon)
     write("savings.json", sav)
     write("overview.json", ov)
+    write("presidents.json", pres)
 
 
 if __name__ == "__main__":
