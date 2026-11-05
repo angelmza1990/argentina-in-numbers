@@ -56,7 +56,8 @@ jobs:
         if: steps.commit.outputs.changed == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh api -X POST "repos/${{ github.repository }}/pages/builds"
+        # The Pages API sometimes answers with an empty body; the data is already pushed, so only warn.
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" --silent || echo "::warning::Could not request a Pages rebuild; it will happen on the next push."
 
       - name: Report failed downloads
         if: steps.fetch.outcome == 'failure'
