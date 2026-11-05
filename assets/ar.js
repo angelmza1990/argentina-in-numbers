@@ -86,5 +86,15 @@
   /** A legend of coloured lines: [[color, label], ...]. */
   const lineLegend = (items) => `<div class="legend">${items.map(([c, l]) => `<span class="key"><span class="ln" style="background:${c}"></span>${l}</span>`).join("")}</div>`;
 
-  window.AR = { lineLegend, month, day, monthLabel, dayLabel, compact, money, usd, p, sp, spark, INDEC_BAND, inflClass, inflationGrid, inflationLegend, monthOptions, esc };
+  /** [Date, value] rows with a null inserted where consecutive points are more than maxDays apart. */
+  function breakGaps(rows, maxDays = 200) {
+    const out = [];
+    rows.forEach((r, i) => {
+      if (i && (r[0] - rows[i - 1][0]) / 864e5 > maxDays) out.push([new Date((+r[0] + +rows[i - 1][0]) / 2), null]);
+      out.push(r);
+    });
+    return out;
+  }
+
+  window.AR = { lineLegend, breakGaps, month, day, monthLabel, dayLabel, compact, money, usd, p, sp, spark, INDEC_BAND, inflClass, inflationGrid, inflationLegend, monthOptions, esc };
 })();

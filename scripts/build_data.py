@@ -149,7 +149,7 @@ def money_to_current(d: str, v: float) -> float:
     """Pesos of any era in today's pesos: four currency changes removed 13 zeros."""
     if d < "1970-01": return v / 1e13
     if d < "1983-06": return v / 1e11
-    if d < "1985-06": return v / 1e7
+    if d < "1985-07": return v / 1e7  # the austral replaced the peso argentino in mid-June 1985; June is still in pesos
     if d < "1992-01": return v / 1e4
     return v
 
@@ -191,6 +191,8 @@ def economy(cpi: dict[str, float]) -> dict:
     for i in range(11, len(real_primary)):
         roll.append([real_primary[i][0], r(sum(v for _, v in real_primary[i - 11:i + 1]), 0)])
     wbv = {k: dict(v) for k, v in wb.items()}
+    mwr = dict(deflate(min_wage, cpi, last))
+    check(0.5 < mwr["1985-07"] / mwr["1985-06"] < 1.5, "the minimum wage jumps at the 1985 currency change")
     check(abs(wbv["gdpGrowth"].get(2002, 0) - (-10.9)) < 1.0, f"2002 GDP growth {wbv['gdpGrowth'].get(2002)} (expected about -10.9%)")
     return {
         "priceBase": last,

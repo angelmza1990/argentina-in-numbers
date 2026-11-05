@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" data-root="..">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Economy · Argentina in Numbers</title>
+  <meta name="description" content="Argentina's economy over time: GDP per capita and growth since 1960, monthly activity, unemployment, poverty, real wages, the minimum wage since 1965, pensions, trade since 1910 and the fiscal balance.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2374acdf'/%3E%3Crect y='21' width='64' height='22' fill='white'/%3E%3Ccircle cx='32' cy='32' r='6' fill='%23f6b40e'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../assets/theme.css">
+</head>
+<body>
+  <main>
+    <div class="wrap">
+      <header class="page-head">
+        <p class="eyebrow">Argentina in Numbers</p>
+        <h1>The economy</h1>
+        <p class="lede">Growth, jobs, poverty and what incomes can buy. Pesos are shown at today's prices, adjusted by the consumer price index, so that 1975 and 2026 can be compared.</p>
+        <p class="updated" id="updated"></p>
+      </header>
+
+      <section class="block">
+        <h2>Growth since 1960</h2>
+        <div class="tiles" id="gdp-tiles"></div>
+        <div class="grid-2" style="margin-top:14px">
+          <div class="card"><h3>GDP per person</h3><div class="chart" id="gdppc"></div><p class="note">Constant 2015 US dollars (World Bank).</p></div>
+          <div class="card"><h3>GDP growth, year by year</h3><div class="chart" id="growth"></div><p class="note">Real growth of GDP. Recessions are the red bars.</p></div>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>Activity month by month</h2>
+        <p class="sub">INDEC's monthly economic activity estimator (EMAE), seasonally adjusted, 2004 = 100.</p>
+        <div class="card"><div class="chart" id="emae"></div><p class="note" id="emae-note"></p></div>
+      </section>
+
+      <section class="block">
+        <div class="grid-2">
+          <div class="card"><h3>Unemployment</h3><div class="chart" id="unemp"></div><p class="note">Share of the labour force out of work, 31 urban areas, quarterly (EPH).</p></div>
+          <div class="card"><h3>Poverty</h3><div class="chart" id="poverty"></div><div id="poverty-legend"></div><p class="note">Share below the poverty line, urban areas, by half-year. Published estimates before 2016 were interrupted and revised; see the method.</p></div>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>What wages buy</h2>
+        <p class="sub">INDEC's wage index divided by the consumer price index, January 2017 = 100. Above 100, wages buy more than in early 2017.</p>
+        <div class="card"><div class="chart" id="wages"></div><div id="wages-legend"></div></div>
+      </section>
+
+      <section class="block">
+        <h2>The minimum wage and the minimum pension</h2>
+        <p class="sub" id="min-sub"></p>
+        <div class="card"><div class="chart" id="minwage"></div><div id="min-legend"></div>
+          <p class="note">Converted across the four currency changes since 1965 (13 zeros) and adjusted by the CPI. The collapse of 1989–90 is real: the minimum wage stayed at 20,000 australes for over a year while prices rose about fortyfold. The poverty line is for one adult; a family of four needs about 3.1 times as much. 2007–2015 is shaded: the official CPI understated inflation then, which inflates real values in those years.</p></div>
+      </section>
+
+      <section class="block">
+        <h2>Trade</h2>
+        <div class="grid-2">
+          <div class="card"><h3>Exports and imports, last 12 months</h3><div class="chart" id="trade"></div><div id="trade-legend"></div><p class="note">Goods, US$ billions, rolling 12-month sums since 1992.</p></div>
+          <div class="card"><h3>Exports since 1910</h3><div class="chart" id="exports"></div><p class="note">US$ billions a year, current dollars, logarithmic scale.</p></div>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>The national government's primary balance</h2>
+        <p class="sub">Revenue minus spending before interest, 12-month total, in pesos of today. A surplus is above zero.</p>
+        <div class="card"><div class="chart" id="primary"></div></div>
+      </section>
+    </div>
+  </main>
+
+  <script src="../assets/vendor/d3.v7.9.0.min.js"></script>
+  <script src="../assets/core.js"></script>
+  <script src="../assets/ar.js"></script>
+  <script src="../assets/pages/economy.js"></script>
+</body>
+</html>
