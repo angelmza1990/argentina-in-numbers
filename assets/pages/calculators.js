@@ -76,7 +76,7 @@
       const best = finals.find((x) => x.s.key !== "infl");
       $("r-note").textContent = `${money(a)} in ${monthLabel(m0)} is worth ${money(keep)} in today's money. Best: ${best.s.key === "uva" ? "UVA" : best.s.label.toLowerCase()}, ${money(best.v)}. Pesos left idle kept ${p(a / keep * 100, 1)} of their value.`;
       const series = STRATS.filter((s) => paths[s.key].some((q) => q[1] != null)).map((s) => ({ id: s.key, name: s.label, color: s.color, values: paths[s.key].filter((q) => q[1] != null), width: s.key === "infl" ? 1.5 : 2 }));
-      MH.lineChart($("r-chart"), { series, height: 340, endLabels: false, log: true, yFormat: (v) => money(v), tipFormat: (v) => money(v), label: "Savings over time" });
+      MH.lineChart($("r-chart"), { series, height: 340, endLabels: false, log: true, yFormat: (v) => `$${AR.compact(v, 0)}`, tipFormat: (v) => money(v), label: "Savings over time" });
       $("r-legend").innerHTML = AR.lineLegend(series.map((s) => [s.color, s.name])) + `<p class="note" style="margin:4px 0 0">Every line is in pesos of ${monthLabel(last)}, so a flat line keeps its purchasing power. Logarithmic scale.</p>`;
     }
     race();

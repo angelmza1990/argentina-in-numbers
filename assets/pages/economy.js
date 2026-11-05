@@ -59,7 +59,7 @@
         { id: "pen", name: "Minimum pension", color: "var(--s3)", values: pen.map((r) => [month(r[0]), r[1]]) },
         { id: "pl", name: "Poverty line, one adult", color: "var(--s8)", values: E.povertyLineReal.map((r) => [month(r[0]), r[1]]), width: 1.5 },
       ],
-      height: 340, endLabels: false, log: true, yFormat: (v) => money(v), tipFormat: (v) => money(v), recessions: INDEC_BAND, label: "Minimum wage and pension at today's prices",
+      height: 340, endLabels: false, log: true, yFormat: (v) => `$${compact(v, 0)}`, tipFormat: (v) => money(v), recessions: INDEC_BAND, label: "Minimum wage and pension at today's prices",
     });
     $("min-legend").innerHTML = AR.lineLegend([["var(--s1)", "Minimum wage"], ["var(--s3)", "Minimum pension"], ["var(--s8)", "Poverty line, one adult (since 2016)"]]) + `<p class="note" style="margin:4px 0 0">Logarithmic scale.</p>`;
 
