@@ -1,8 +1,7 @@
 name: Update data
 
-# The World Bank updates its indicators a few times a year. Every Monday this downloads
-# the sources, rebuilds the datasets and commits them when anything changed.
-# Flags are only downloaded for countries that do not have one yet.
+# Every Monday this downloads every source (argentinadatos.com, the BCRA, datos.gob.ar and the
+# World Bank), rebuilds the datasets and commits them when anything changed.
 
 on:
   schedule:
@@ -31,7 +30,7 @@ jobs:
       - name: Download sources
         id: fetch
         continue-on-error: true
-        timeout-minutes: 30
+        timeout-minutes: 40
         run: python3 scripts/fetch_data.py
 
       - name: Build datasets
@@ -42,7 +41,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data assets/flags
+          git add data
           if git diff --cached --quiet; then
             echo "No data changes."
             echo "changed=false" >> "$GITHUB_OUTPUT"

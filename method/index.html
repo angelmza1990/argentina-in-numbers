@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" data-root="..">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Method · Argentina in Numbers</title>
+  <meta name="description" content="Sources, definitions and limitations of Argentina in Numbers: INDEC, the Central Bank, argentinadatos.com and the World Bank; currency changes, the 2007-2015 CPI and how real values are computed.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2374acdf'/%3E%3Crect y='21' width='64' height='22' fill='white'/%3E%3Ccircle cx='32' cy='32' r='6' fill='%23f6b40e'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../assets/theme.css">
+</head>
+<body>
+  <main>
+    <div class="wrap">
+      <header class="page-head">
+        <p class="eyebrow">Argentina in Numbers</p>
+        <h1>Method</h1>
+        <p class="lede">Where every number comes from, how it is transformed, and what to keep in mind when reading it.</p>
+      </header>
+
+      <section class="block">
+        <h2>Sources</h2>
+        <div class="card table-scroll">
+          <table class="data">
+            <thead><tr><th>Data</th><th>Source</th><th>Starts</th><th>Frequency</th></tr></thead>
+            <tbody>
+              <tr><td>Monthly and 12-month inflation</td><td>INDEC and predecessors, via argentinadatos.com (the same series the Central Bank publishes)</td><td>1943</td><td>Monthly</td></tr>
+              <tr><td>CPI by category, core and regulated prices</td><td>INDEC, national CPI (base December 2016), via datos.gob.ar</td><td>2016</td><td>Monthly</td></tr>
+              <tr><td>Official, blue, MEP, CCL, crypto and card dollar</td><td>argentinadatos.com (selling price)</td><td>2011 to 2023, by rate</td><td>Daily</td></tr>
+              <tr><td>Wholesale dollar (Com. A 3500)</td><td>Banco Central de la República Argentina (BCRA), API v4</td><td>2002</td><td>Daily</td></tr>
+              <tr><td>Reserves, monetary base, M2, loans, interest rates, CER, ICL</td><td>BCRA, API v4</td><td>1985 to 2015, by series</td><td>Daily</td></tr>
+              <tr><td>Analysts' inflation expectations (REM)</td><td>BCRA</td><td>2004</td><td>Monthly</td></tr>
+              <tr><td>Country risk (EMBI)</td><td>JP Morgan, via argentinadatos.com</td><td>1999</td><td>Daily</td></tr>
+              <tr><td>UVA</td><td>BCRA, via argentinadatos.com</td><td>2016</td><td>Daily</td></tr>
+              <tr><td>Term deposit rates by bank</td><td>BCRA, via argentinadatos.com</td><td>Latest</td><td>—</td></tr>
+              <tr><td>EMAE (monthly activity), unemployment, poverty, wage index, trade</td><td>INDEC, via datos.gob.ar</td><td>1910 to 2016, by series</td><td>Monthly to half-yearly</td></tr>
+              <tr><td>Minimum wage, minimum pension, primary balance</td><td>Ministry of Economy and INDEC, via datos.gob.ar</td><td>1965 to 2016, by series</td><td>Monthly</td></tr>
+              <tr><td>GDP, GDP per person, population, Gini</td><td>World Bank, World Development Indicators</td><td>1960</td><td>Yearly</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">A scheduled job downloads every source each Monday, rebuilds the datasets and publishes them when anything changed. The raw downloads are kept in the repository, so the site can always be rebuilt. Four INDEC series (recreation and restaurant prices, annual imports before 1992 and unemployment before 2003) return no data from the public API and are not shown.</p>
+      </section>
+
+      <section class="block">
+        <h2>Definitions</h2>
+        <div class="prose">
+          <p><strong>Price index since 1943.</strong> Monthly inflation rates are chained into a single index (February 1943 = 1). Calendar-year inflation is December against December; the current year is shown to the latest month.</p>
+          <p><strong>Today's pesos.</strong> A nominal amount from month <em>m</em> is multiplied by the index of the latest month divided by the index of month <em>m</em>. Values before 1992 are first converted to today's currency: the peso ley (1970) removed 2 zeros, the peso argentino (June 1983) 4, the austral (June 1985) 3 and the peso (January 1992) 4, 13 in all.</p>
+          <p><strong>The dollar.</strong> Selling prices. Before argentinadatos' series begins, the wholesale rate comes from the Central Bank. The "dollar at today's prices" adjusts the wholesale rate by Argentine inflation only, so it is a rough guide, not a real exchange rate.</p>
+          <p><strong>Real deposit return.</strong> Each month's average 30-day deposit rate, earned for one month, against that month's inflation: (1 + rate/12) / (1 + inflation) − 1, annualized.</p>
+          <p><strong>Real wages.</strong> INDEC's wage index divided by the CPI, both set to 100 in January 2017. The all-workers index includes unregistered workers, whose wages are measured with a delay of about five months.</p>
+          <p><strong>Calculators.</strong> Term deposits roll over every 30 days at the average rate of each month; the UVA path follows the unit itself (UVA deposits usually add a small rate on top); dollar paths buy at the starting month's average rate and value the dollars at the latest month's. Taxes, fees, spreads and the controls that limited dollar purchases in many years are ignored.</p>
+          <p><strong>By presidency.</strong> Each term runs from the month before taking office to the last full month in office. A calendar year of GDP counts for the president who governed most of it.</p>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>Limitations</h2>
+        <div class="prose">
+          <p><strong>2007–2015 inflation.</strong> Between 2007 and 2015 INDEC's index was intervened and is widely considered to have understated inflation, by around 10 to 15 points a year according to provincial and private estimates. The site shows the official series, with those years shaded. Real values in that period (wages, the minimum wage, the real dollar, real deposit returns) therefore look better than they were. In January 2016 INDEC declared a statistical emergency and stopped publishing several series; that is why poverty and unemployment have a gap in 2015–2016.</p>
+          <p><strong>Poverty before 2016.</strong> The poverty series since 2003 uses INDEC's published figures, which were interrupted in 2013 and estimated on different bases; comparisons across 2016 should be made with care.</p>
+          <p><strong>Gross reserves.</strong> Reserves are gross: they include the swap line with the People's Bank of China, banks' dollar reserve requirements and other liabilities, so net reserves are considerably lower.</p>
+          <p><strong>Not advice.</strong> This site is for information and education only. Nothing on it is investment, financial or tax advice, and past returns do not predict future ones. Data comes from third parties, is processed automatically and may contain errors.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="../assets/vendor/d3.v7.9.0.min.js"></script>
+  <script src="../assets/core.js"></script>
+  <script src="../assets/ar.js"></script>
+  <script>MH.shell("method");</script>
+</body>
+</html>
