@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" data-root="..">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dollar · Argentina in Numbers</title>
+  <meta name="description" content="Every Argentine dollar rate since 2011, daily: official, wholesale, blue, MEP, CCL, crypto and card, the gap between them, the dollar in today's pesos since 2002, and a converter for any date.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2374acdf'/%3E%3Crect y='21' width='64' height='22' fill='white'/%3E%3Ccircle cx='32' cy='32' r='6' fill='%23f6b40e'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../assets/theme.css">
+</head>
+<body>
+  <main>
+    <div class="wrap">
+      <header class="page-head">
+        <p class="eyebrow">Argentina in Numbers</p>
+        <h1>The dollar</h1>
+        <p class="lede">Argentina has had many dollars at once: the official rate, the wholesale rate banks trade at, the informal "blue" on the street, and the MEP and CCL rates implied by buying a bond in pesos and selling it in dollars. The gap between them measures how tight exchange controls were.</p>
+        <p class="updated" id="updated"></p>
+      </header>
+
+      <section class="block">
+        <h2>Today</h2>
+        <div class="card table-scroll"><table class="data" id="today"></table></div>
+        <p class="note">Selling price in pesos per dollar. The card rate adds the taxes charged on purchases abroad.</p>
+      </section>
+
+      <section class="block">
+        <h2>Every rate over time</h2>
+        <div class="controls">
+          <span class="control">Period <span id="period"></span></span>
+          <span class="control">Scale <span id="scale"></span></span>
+        </div>
+        <div class="controls"><span class="control">Rates <span class="chips" id="pick"></span></span></div>
+        <div class="card">
+          <div class="chart" id="rates"></div>
+          <div id="rates-legend"></div>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>The gap</h2>
+        <p class="sub">How far the blue and CCL rates stood above the official one, monthly average. The gap opens when the government restricts buying dollars (the "cepo") and closes when restrictions are lifted.</p>
+        <div class="card">
+          <div class="chart" id="gap"></div>
+          <div id="gap-legend"></div>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>Is the dollar cheap or expensive?</h2>
+        <p class="sub" id="real-sub"></p>
+        <div class="card">
+          <div class="chart" id="real"></div>
+          <p class="note">A rough guide, not a real exchange rate: it adjusts only for Argentine inflation, not for inflation in the United States or trading partners (a few percent a year), so long-run comparisons overstate how expensive the past dollar was. 2007–2015 is shaded because the official CPI understated inflation then, which makes those years look cheaper than they were.</p>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>Converter</h2>
+        <div class="calc">
+          <div class="card form">
+            <label>Amount <input type="number" id="amt" value="100000" min="0" step="any"></label>
+            <label>Direction <select id="dir"><option value="ars">Pesos to dollars</option><option value="usd">Dollars to pesos</option></select></label>
+            <label>Date <input type="date" id="date"></label>
+          </div>
+          <div class="card">
+            <div class="rank" id="conv"></div>
+            <p class="note" id="conv-note"></p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="../assets/vendor/d3.v7.9.0.min.js"></script>
+  <script src="../assets/core.js"></script>
+  <script src="../assets/ar.js"></script>
+  <script src="../assets/pages/dollar.js"></script>
+</body>
+</html>
